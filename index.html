@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kriz Thea Alipante - Portfolio</title>
+  <link rel="icon" href="me.jpg" type="image/jpg">
+
+  <!-- Fancy Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Roboto', sans-serif; background:#5c4033; color:#f5f5f5; overflow-x:hidden; position:relative; }
+
+    /* Background animation */
+    #bgCanvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
+
+    /* Header */
+    header {
+      text-align:center; padding:50px 20px 20px;
+    }
+    header img.profile-pic {
+      width:180px; height:180px; border-radius:50%; object-fit:cover; border:4px solid #d4b483; margin-bottom:20px;
+    }
+    header h1 { font-family:'Playfair Display', serif; font-size:3em; color:#f4e1d2; margin-bottom:10px; }
+    header p { font-size:1em; color:#f5e9dc; margin:5px 0; }
+    header a.btn {
+      display:inline-block; margin:20px 0; padding:12px 30px; background-color:#d4b483;
+      color:#5c4033; font-weight:bold; border-radius:10px; text-decoration:none;
+      transition:0.3s; box-shadow:0 4px 10px rgba(0,0,0,0.3);
+    }
+    header a.btn:hover { background-color:#c19b70; }
+
+    /* Section container boxes */
+    .container {
+      max-width:900px; margin:40px auto; padding:30px 25px; background:rgba(92,64,51,0.9);
+      border-radius:20px; backdrop-filter:blur(8px); box-shadow:0 10px 30px rgba(0,0,0,0.5); transition:0.3s;
+    }
+    .container:hover { transform: translateY(-5px); }
+
+    /* Section headings */
+    section h2 {
+      font-family:'Playfair Display', serif; font-size:2.2em; margin-bottom:15px; border-bottom:3px solid #d4b483;
+      display:inline-block; padding-bottom:5px;
+    }
+
+    /* Text and list inside boxes */
+    .container p, .container li { line-height:1.7; margin-bottom:10px; font-size:1em; }
+
+    ul { list-style:disc inside; }
+
+    /* Responsive */
+    @media (max-width:768px) {
+      header h1 { font-size:2.2em; }
+      .container { margin:20px; padding:20px; }
+      header img.profile-pic { width:140px; height:140px; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bgCanvas"></canvas>
+
+  <header>
+    <img src="me.webp" alt="Kriz Thea Alipante" class="profile-pic">
+    <h1>KRIZ THEA ALIPANTE</h1>
+    <p>📞 09633724941 | ✉️ kriztheaaaa@gmail.com</p>
+    <p>🔗 <a href="https://www.linkedin.com/in/thea-alipante-032787326" target="_blank">LinkedIn</a></p>
+    <a href="resume.pdf" class="btn" download>Download Resume</a>
+  </header>
+
+  <!-- About Me -->
+  <section class="container">
+    <h2>ABOUT ME</h2>
+    <p>Kriz Thea Alipante, an aspiring IT student with growing knowledge in information technology and service management. I possess basic IT skills such as document processing, data entry, presentation creation, and computer troubleshooting. I'm eager to expand my technical expertise and apply my learning in real-world settings. Known for being adaptable, detail-oriented, and motivated, I strive to continuously improve and contribute effectively in every task.</p>
+  </section>
+
+  <!-- Skills -->
+  <section class="container">
+    <h2>SKILLS</h2>
+    <ul>
+      <li>Customer service and communication skills</li>
+      <li>Time management skills</li>
+      <li>Basic computer literacy</li>
+      <li>Verbal and written communication skills</li>
+    </ul>
+  </section>
+
+  <!-- Education -->
+  <section class="container">
+    <h2>EDUCATION</h2>
+    <p><strong>College:</strong> Laguna State Polytechnic University</p>
+    <p>Bachelor of Science in Information Technology Major in Service Management Program, Siniloan Campus</p>
+  </section>
+
+  <!-- Experience -->
+  <section class="container">
+    <h2>EXPERIENCE</h2>
+    <ul>
+      <li><strong>D and W Antique Shop</strong> - Customer Service Assistant (March 2021- August 2021)</li>
+      <li><strong>Meses Shawarma House</strong> - Sales Clerk (August 2021- February 2022)</li>
+      <li><strong>AGBM Corporation</strong> - Front Desk Assistant (March 2022-2025)</li>
+    </ul>
+  </section>
+
+  <!-- Certifications -->
+  <section class="container">
+    <h2>CERTIFICATIONS</h2>
+    <ul>
+      <li>Digital Safety and Security Awareness (2025)</li>
+      <li>Lean Six Sigma White Belt Certification for Service Industry (2025)</li>
+      <li>USER EXPERIENCE (2025)</li>
+      <li>DIGITAL SKILLS FOR WORK AND LIFE (2025)</li>
+      <li>Inbound Marketing Certified</li>
+      <li>Information Security (2025)</li>
+      <li>Practising systems thinking in practice (STiP)</li>
+    </ul>
+  </section>
+
+  <!-- Background Animation Script -->
+  <script>
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let shapes = [];
+    const colors = ['#d4b483','#c19b70','#a67853','#f4e1d2'];
+
+    function random(min,max){ return Math.random()*(max-min)+min; }
+
+    class Shape {
+      constructor() {
+        this.x=random(0,canvas.width);
+        this.y=random(0,canvas.height);
+        this.size=random(5,15);
+        this.speedX=random(-0.5,0.5);
+        this.speedY=random(-0.5,0.5);
+        this.color=colors[Math.floor(random(0,colors.length))];
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+        ctx.fillStyle=this.color;
+        ctx.fill();
+      }
+      update() {
+        this.x+=this.speedX;
+        this.y+=this.speedY;
+        if(this.x<0||this.x>canvas.width)this.speedX*=-1;
+        if(this.y<0||this.y>canvas.height)this.speedY*=-1;
+        this.draw();
+      }
+    }
+
+    for(let i=0;i<120;i++)shapes.push(new Shape());
+
+    function animate() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      shapes.forEach(shape=>shape.update());
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize',()=>{
+      canvas.width=window.innerWidth;
+      canvas.height=window.innerHeight;
+    });
+  </script>
+</body>
+</html>
